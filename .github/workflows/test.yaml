@@ -7,8 +7,8 @@ on:
       - 'package.json'
       - 'CHANGELOG.md'
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
 jobs:
   build:
@@ -29,7 +29,7 @@ jobs:
     #     tag-prefix: 'mb'
     #     output-file: 'CHANGELOG.md'
 
-      - name: Conventional Changelog Action
-        uses: TriPSs/conventional-changelog-action@v3
-        with:
-          github-token: ${{ secrets.github_token }}
+    - name: Conventional Changelog Action
+      uses: TriPSs/conventional-changelog-action@v3
+      with:
+        github-token: ${{ secrets.github_token }}
