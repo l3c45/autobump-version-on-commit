@@ -91,18 +91,33 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://npm.pkg.github.com/
-      - name: Configure npm
-        run: |
-          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
-          cat .npmrc
-        env:
-          NPM_TOKEN: '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%'
+          registry-url: 'https://registry.npmjs.org'
+         # registry-url: https://npm.pkg.github.com/
+      # - name: Configure npm
+      #   run: |
+      #     echo '//registry.npmjs.org/:_authToken=' > .npmrc
+      #     cat .npmrc
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    # - name: Publish
-    #   run: npm publish
-    #   env:
-    #     NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+
+
+    #   publish-gpr:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     permissions:
+#       packages: write
+#       contents: read
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 16
+#           registry-url: https://npm.pkg.github.com/
+#       - name: Install dependencies
+#         run: npm i
+#       - run: npm publish
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
