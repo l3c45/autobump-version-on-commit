@@ -63,7 +63,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         git-message: 'chore(release): {version}'
         # preset: 'angular'
-        preset: 'conventionalcommits'
+        # preset: 'conventionalcommits'
         # tag-prefix: 'mb'
         output-file: "false"
         skip-on-empty: 'false'
