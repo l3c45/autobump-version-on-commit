@@ -1,3 +1,40 @@
+# # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+# # name: Node.js Package
+
+# # on:
+# #   release:
+# #     types: [created]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 16
+
+
+#   publish-gpr:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     permissions:
+#       packages: write
+#       contents: read
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 16
+#           registry-url: https://npm.pkg.github.com/
+#       - name: Install dependencies
+#         run: npm i
+#       - run: npm publish
+#         env:
+#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+
 name: Bump version
 on:
   push:
@@ -15,7 +52,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -25,10 +61,10 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         git-message: 'chore(release): {version}'
-        preset: 'angular'
-        tag-prefix: 'mb'
+        # preset: 'angular'
+        # tag-prefix: 'mb'
         output-file: "false"
-        skip-on-empty: 'false'
+        skip-on-empty: 'true'
     - name: Create Release
       # uses: softprops/action-gh-release@v1  #actions/create-release@v1
       # if: ${{ steps.changelog.outputs.skipped == 'false' }}
@@ -43,7 +79,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        title: MyReleaseMessage
+        title: ${{ steps.changelog.outputs.tag }}
         tag_name: ${{ steps.changelog.outputs.tag }}
         release_name: ${{ steps.changelog.outputs.tag }}
         body: ${{ steps.changelog.outputs.clean_changelog }}
