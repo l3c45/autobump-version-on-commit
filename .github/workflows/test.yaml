@@ -28,11 +28,7 @@ jobs:
         preset: 'angular'
         tag-prefix: 'mb'
         output-file: "false"
-        #output-file: 'CHANGELOG.md'
         skip-on-empty: 'false'
-        # skip-version-file: 'false'
-        # skip-commit: 'false'
-
     - name: Create Release
       # uses: softprops/action-gh-release@v1  #actions/create-release@v1
       # if: ${{ steps.changelog.outputs.skipped == 'false' }}
@@ -53,8 +49,9 @@ jobs:
         node-version: 16
         registry-url: https://npm.pkg.github.com/
     - name: Install dependencies
-        run: npm i
-    - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: npm i
+    - name: Publish
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
