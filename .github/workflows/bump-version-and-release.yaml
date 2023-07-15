@@ -31,3 +31,26 @@ jobs:
       with:
         title: ${{ steps.autobump.outputs.version}}
 
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        registry-url: https://npm.pkg.github.com/
+        #to publish on npm use => registry-url: 'https://registry.npmjs.org'
+        scope: '@l3c45'
+    - name: test
+      run: echo package.json
+    - name: Publish package
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        #and set accesToken on GH SECRETS=> NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+
