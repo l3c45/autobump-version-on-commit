@@ -76,21 +76,21 @@ jobs:
       #   release_name: ${{ steps.changelog.outputs.tag }}
       #   body: ${{ steps.changelog.outputs.clean_changelog }}
       #   token: ${{ github.token }}
-      run: echo ${{ steps.autobump.outputs.version}}
-    #   uses: elgohr/Github-Release-Action@v4
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     title: MyTitle
-    #     tag_name: ${{ steps.changelog.outputs.tag }}
-    #     release_name: ${{ steps.changelog.outputs.tag }}
-    #     body: ${{ steps.changelog.outputs.clean_changelog }}
-    # - uses: actions/setup-node@v3
-    #   with:
-    #     node-version: 16
-    #     registry-url: https://npm.pkg.github.com/
-    # - name: Install dependencies
-    #   run: npm i
+     # run: echo ${{ steps.autobump.outputs.version}}
+      uses: elgohr/Github-Release-Action@v4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        title: ${{ steps.autobump.outputs.version}}
+        # tag_name: ${{ steps.changelog.outputs.tag }}
+        # release_name: ${{ steps.changelog.outputs.tag }}
+        # body: ${{ steps.changelog.outputs.clean_changelog }}
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        registry-url: https://npm.pkg.github.com/
+    - name: Install dependencies
+      run: npm i
     # - name: Publish
     #   run: npm publish
     #   env:
