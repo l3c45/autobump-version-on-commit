@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
+      contents: read
     steps:
     - uses: actions/checkout@v2
       with:
@@ -31,13 +33,13 @@ jobs:
       with:
         title: ${{ steps.autobump.outputs.version}}
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
+  # publish-gpr:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     packages: write
+  #     contents: read
+  #   steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
