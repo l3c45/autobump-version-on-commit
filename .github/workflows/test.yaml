@@ -57,6 +57,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN}}
     - name: Bump version and push tag
+        id: autobump
       uses: TriPSs/conventional-changelog-action@v3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -75,7 +76,7 @@ jobs:
       #   release_name: ${{ steps.changelog.outputs.tag }}
       #   body: ${{ steps.changelog.outputs.clean_changelog }}
       #   token: ${{ github.token }}
-      run: echo ${{ steps}}
+      run: echo ${{ steps.autobump.outputs}}
     #   uses: elgohr/Github-Release-Action@v4
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
