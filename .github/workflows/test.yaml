@@ -34,14 +34,18 @@ jobs:
         # skip-commit: 'false'
 
     - name: Create Release
-      uses: softprops/action-gh-release@v1  #actions/create-release@v1
-      if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      # uses: softprops/action-gh-release@v1  #actions/create-release@v1
+      # if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      # env:
+      #   GITHUB_TOKEN: ${{ secrets.github_token }}
+      # with:
+      #   tag_name: ${{ steps.changelog.outputs.tag }}
+      #   release_name: ${{ steps.changelog.outputs.tag }}
+      #   body: ${{ steps.changelog.outputs.clean_changelog }}
+      #   token: ${{ github.token }}
+      uses: elgohr/Github-Release-Action@v4
       env:
-        GITHUB_TOKEN: ${{ secrets.github_token }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.changelog.outputs.tag }}
-        release_name: ${{ steps.changelog.outputs.tag }}
-        body: ${{ steps.changelog.outputs.clean_changelog }}
-        token: ${{ github.token }}
-
+        title: MyReleaseMessage
 
