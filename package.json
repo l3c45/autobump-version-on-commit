@@ -1,5 +1,5 @@
 {
-  "name": "autobump-version",
+  "name": "@l3c45/autobump-version",
   "version": "2.3.0",
   "description": "",
   "main": "index.js",
