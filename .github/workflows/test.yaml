@@ -57,8 +57,8 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN}}
     - name: Bump version and push tag
-        id: autobump
       uses: TriPSs/conventional-changelog-action@v3
+      id: autobump
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         git-message: 'chore(release): {version}'
