@@ -70,9 +70,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         title: ${{ steps.autobump.outputs.version}}
-        # tag_name: ${{ steps.changelog.outputs.tag }}
-        # release_name: ${{ steps.changelog.outputs.tag }}
-        # body: ${{ steps.changelog.outputs.clean_changelog }}
+        tag_name: ${{ steps.changelog.outputs.tag }}
+        release_name: ${{ steps.changelog.outputs.tag }}
+        body: ${{ steps.changelog.outputs.clean_changelog }}
     - uses: actions/setup-node@v3
       with:
         node-version: 16
@@ -92,7 +92,12 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
+      - name: Configure npm
+        run: |
+          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+          cat .npmrc
+        env:
+          NPM_TOKEN: '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%'
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
