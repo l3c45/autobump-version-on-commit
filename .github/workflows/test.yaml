@@ -17,19 +17,19 @@ jobs:
       contents: write
 
     steps:
-    # - uses: actions/checkout@v2
-    #   with:
-    #     token: ${{ secrets.GITHUB_TOKEN}}
-    # - name: Bump version and push tag
-    #   uses: TriPSs/conventional-changelog-action@v3
-    #   with:
-    #     github-token: ${{ secrets.GITHUB_TOKEN }}
-    #     git-message: 'chore(release): {version}'
-    #     preset: 'angular'
-    #     tag-prefix: 'mb'
-    #     output-file: 'CHANGELOG.md'
-
-    - name: Conventional Changelog Action
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN}}
+    - name: Bump version and push tag
       uses: TriPSs/conventional-changelog-action@v3
       with:
-        github-token: ${{ secrets.github_token }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        git-message: 'chore(release): {version}'
+        preset: 'angular'
+        tag-prefix: 'mb'
+        output-file: 'CHANGELOG.md'
+
+    # - name: Conventional Changelog Action
+    #   uses: TriPSs/conventional-changelog-action@v3
+    #   with:
+    #     github-token: ${{ secrets.github_token }}
