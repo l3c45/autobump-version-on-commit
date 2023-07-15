@@ -46,7 +46,7 @@ jobs:
         #to publish on npm use => registry-url: 'https://registry.npmjs.org'
         scope: '@l3c45'
     - name: test
-      run: echo package.json
+      run: cat package.json
     - name: Publish package
       run: npm publish
       env:
