@@ -27,7 +27,8 @@ jobs:
         git-message: 'chore(release): {version}'
         preset: 'angular'
         tag-prefix: 'mb'
-        output-file: 'CHANGELOG.md'
+        output-file: "false"
+        #output-file: 'CHANGELOG.md'
         skip-on-empty: 'false'
         skip-version-file: 'false'
         skip-commit: 'false'
@@ -36,3 +37,12 @@ jobs:
     #   uses: TriPSs/conventional-changelog-action@v3
     #   with:
     #     github-token: ${{ secrets.github_token }}
+    - name: Create Release
+      uses: actions/create-release@v1
+      if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.github_token }}
+      with:
+        tag_name: ${{ steps.changelog.outputs.tag }}
+        release_name: ${{ steps.changelog.outputs.tag }}
+        body: ${{ steps.changelog.outputs.clean_changelog }}
