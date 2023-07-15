@@ -28,6 +28,9 @@ jobs:
         preset: 'angular'
         tag-prefix: 'mb'
         output-file: 'CHANGELOG.md'
+        skip-on-empty: 'false'
+        skip-version-file: 'false'
+        skip-commit: 'false'
 
     # - name: Conventional Changelog Action
     #   uses: TriPSs/conventional-changelog-action@v3
