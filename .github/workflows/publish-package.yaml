@@ -19,6 +19,8 @@ jobs:
         registry-url: https://npm.pkg.github.com/
         #to publish on npm use => registry-url: 'https://registry.npmjs.org'
         scope: '@l3c45'
+    - name: Install packages
+      run: npm i
     - name: Publish package
       run: npm publish
       env:
