@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+.idea
+.serverless
+dist
+*.log
+yarn.lock
+.test-artifacts/
