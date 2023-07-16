@@ -22,6 +22,6 @@ jobs:
     - name: Publish package
       run: npm publish
       env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        NODE_AUTH_TOKEN: ${{secrets.ACCESS_TOKEN}}
         #and set accesToken on GH SECRETS=> NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 

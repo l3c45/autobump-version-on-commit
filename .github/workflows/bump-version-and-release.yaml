@@ -17,42 +17,20 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN}}
+        token: ${{ secrets.ACCESS_TOKEN}}
     - name: Bump version and push tag
       uses: TriPSs/conventional-changelog-action@v3
       id: autobump
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.ACCESS_TOKEN }}
         git-message: 'chore(release): {version}'
         output-file: "false"
         skip-on-empty: 'false'
     - name: Create Release
       uses: elgohr/Github-Release-Action@v4
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         title: ${{ steps.autobump.outputs.version}}
-
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        registry-url: https://npm.pkg.github.com/
-        #to publish on npm use => registry-url: 'https://registry.npmjs.org'
-        scope: '@l3c45'
-    - name: test
-      run: cat package.json
-    - name: Publish package
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        #and set accesToken on GH SECRETS=> NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
 
